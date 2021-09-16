@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.grey,
       ),
       home: const MyHomePage(title: 'Sign In'),
     );
@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
       children: [
         const Text("Email",
             style: TextStyle(
-              color: Colors.black,
+              color: Colors.white,
               fontWeight: FontWeight.bold,
               fontFamily: 'OpenSans',
             )),
@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
         Container(
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: const Color(0x694CA8F0),
+              color: Colors.white30,
               borderRadius: BorderRadius.circular(10.0),
               boxShadow: const [
                 BoxShadow(
@@ -65,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 hintText: "Enter Email",
                 hintStyle: TextStyle(
-                  color: Colors.white54,
+                  color: Colors.white,
                   fontFamily: 'OpenSans',
                 ),
               ),
@@ -80,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
       children: [
         const Text("Password",
             style: TextStyle(
-              color: Colors.black,
+              color: Colors.white,
               fontWeight: FontWeight.bold,
               fontFamily: 'OpenSans',
             )),
@@ -88,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-            color: const Color(0x694CA8F0),
+            color: Colors.white30,
             borderRadius: BorderRadius.circular(10.0),
             boxShadow: const [
               BoxShadow(
@@ -102,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: const TextField(
             obscureText: true,
             style: TextStyle(
-              color: Colors.black,
+              color: Colors.white,
             ),
             decoration: InputDecoration(
               border: InputBorder.none,
@@ -113,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               hintText: "Enter Password",
               hintStyle: TextStyle(
-                color: Colors.white54,
+                color: Colors.white,
                 fontFamily: 'OpenSans',
               ),
             ),
@@ -123,12 +123,112 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  Widget _forgetPassword() {
+    return Container(
+      alignment: Alignment.centerRight,
+      child: TextButton(
+        onPressed: () {
+          // ignore: avoid_print
+          print("Forget Button Click");
+        },
+        child: const Text(
+          'Forget Password',
+          style: TextStyle(
+            color: Colors.redAccent,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'OpenSans',
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _login() {
+    return Container(
+      alignment: Alignment.center,
+      child: ElevatedButton(
+        onPressed: () {
+          // ignore: avoid_print
+          print("Log In Click");
+        },
+        child: const Text(
+          'Log In',
+          style: TextStyle(color: Colors.white),
+        ),
+        style: ElevatedButton.styleFrom(
+            primary: Colors.black26,
+            onPrimary: Colors.green,
+            elevation: 1,
+            shadowColor: Colors.white,
+            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10)),
+      ),
+    );
+  }
+
+  Widget _remember() {
+    // ignore: avoid_unnecessary_containers
+    return Container(
+      child: Row(
+        children: [
+          Theme(
+            data: ThemeData(unselectedWidgetColor: Colors.white),
+            child: Checkbox(
+              value: _rememberMe,
+              checkColor: Colors.green,
+              activeColor: Colors.black38,
+              onChanged: (value) {
+                setState(() {
+                  _rememberMe = value!;
+                  // ignore: avoid_print
+                  print("Remember me ");
+                });
+              },
+            ),
+          ),
+          const Text(
+            'Remember Me',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _createAccount() {
+    return Container(
+      alignment: Alignment.centerRight,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          const Text(
+            "Don't have account yet ? ",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          TextButton(
+            onPressed: () {},
+            child: const Text(
+              'Create an Account',
+              style: TextStyle(
+                color: Colors.lightGreen,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'OpenSans',
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Log In"),
-      ),
       body: Stack(
         children: <Widget>[
           Container(
@@ -139,12 +239,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 begin: Alignment.topCenter,
                 end: Alignment.center,
                 colors: [
-                  Color(0xFF228FE0),
-                  Color(0xFF228FE0),
-                  Color(0xFF228FE0),
-                  Color(0xFF228FE0),
+                  Color(0xFF2D2F50),
+                  Color(0xFF2D2F47),
+                  Color(0xFF2D2F43),
+                  Color(0xFF2D2F41),
                 ],
-                stops: [0.1, 0.4, 0.7, 0.9],
+                stops: [0.0, 0.3, 0.7, 0.8],
               ),
             ),
           ),
@@ -171,92 +271,30 @@ class _MyHomePageState extends State<MyHomePage> {
                   const SizedBox(height: 20.0),
                   _buildEmail(),
                   const SizedBox(height: 20.0),
+
                   _buildPassword(),
-                  //FOrget password field
-                  Container(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {
-                        // ignore: avoid_print
-                        print("Forget Button Click");
-                      },
-                      child: const Text(
-                        'Forget Password',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'OpenSans',
-                        ),
-                      ),
-                    ),
+                  const SizedBox(
+                    height: 15.0,
                   ),
+                  //FOrget password field
 
                   // ignore: avoid_unnecessary_containers
                   Container(
+                    alignment: Alignment.center,
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Theme(
-                          data: ThemeData(unselectedWidgetColor: Colors.white),
-                          child: Checkbox(
-                            value: _rememberMe,
-                            checkColor: Colors.green,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                _rememberMe = value!;
-                                // ignore: avoid_print
-                                print("Remember me ");
-                              });
-                            },
-                          ),
-                        ),
-                        const Text('Remember Me'),
+                        _remember(),
+                        _forgetPassword(),
                       ],
                     ),
                   ),
-                  Container(
-                    alignment: Alignment.center,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // ignore: avoid_print
-                        print("Log iN Click");
-                      },
-                      child: const Text('Log In'),
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                          const Color(0xFF73AEF5),
-                        ),
-                      ),
-                    ),
-                  ),
+                  _login(),
+
                   const SizedBox(
                     height: 10.0,
                   ),
-                  Container(
-                    alignment: Alignment.centerRight,
-                    child: Row(
-                      children: [
-                        const Text(
-                          "Don't have account",
-                          style: TextStyle(
-                            color: Colors.black87,
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            'Create Account',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'OpenSans',
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                  _createAccount(),
                 ],
               ),
             ),
